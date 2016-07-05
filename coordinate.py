@@ -1,12 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+'''
 class coordinate:
     def __init__(self,x=0.0,y=0.0):
         self.x=x
         self.y=y
 a=coordinate()
-
+'''
 def geodata(num_people,method="uniform",xbound=100.0,ybound=100.0):
     """
     Generator a n*2 array, which is the x-coordinate and y-coordinate
@@ -21,7 +21,7 @@ def geodata(num_people,method="uniform",xbound=100.0,ybound=100.0):
     if method=="uniform":
         population[:,0]=np.random.uniform(0,xbound,num_people)
         population[:,1]=np.random.uniform(0,ybound,num_people)
-        print(population)
+        #print(population)
         plt.scatter(population[:,0],population[:,1])
         #plt.show()
         return population
