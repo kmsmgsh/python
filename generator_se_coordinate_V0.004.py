@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import coordinate as cr
 import matplotlib.animation as animation
+
 '''
 Changelog for V0.002
 1.The method for calculate individual infected changed: From pr(object j infected by object i)=beta
@@ -32,7 +33,10 @@ class heteregeneousModel:
         self.geo=cr.geodata(num_people,"cluster",xbound=100.0,ybound=100.0,history=history)
         self.BetaMatrix()
         self.mainProcess()
-    def transform(self,state):
+    
+    
+    
+    def transform_prob(self,state):
         """
         transform the current state to next step:
         suspect(0)->infectious(1) with probability Lambda(state,beta)
@@ -45,12 +49,19 @@ class heteregeneousModel:
         prob_transitions = np.zeros((self.num_people,))
         prob_transitions[state==0] = p_S_to_I[p_S_to_I!=0]
         prob_transitions[state==1] = p_I_to_R
+        return prob_transitions
+    
+    def transformation(self,state,prob_transitions):
+        
         Binomi=np.random.uniform(0, 1, prob_transitions.shape)
         transitions = prob_transitions > Binomi
         #
         self.InfectedOutput(state,prob_transitions,Binomi)
         #Debug function
         return state + transitions
+    def transform(self,state):
+        prob_transitions=self.transform_prob(state)
+        return self.transformation(state,prob_transitions)
     def InfectiousStop(self,state):
         """
          When all infectious are remove, then we can stop the 
@@ -130,6 +141,9 @@ class heteregeneousModel:
         #################################################
         return probInfect
     def Animate(self):
+        '''
+        Function for show the animation of infectious
+        '''
         numframes = self.nday+1
         numpoints = self.num_people
         color_data =np.zeros((numframes, numpoints)) 
@@ -149,6 +163,10 @@ class heteregeneousModel:
                                   fargs=(color_data, scat),interval=1000)
         plt.show()
     def InfectedOutput(self,state,prob_transitions,Binomi):
+        '''
+        function for debugging
+        Print the dice and the infected probability for state changed individuals
+        '''
         print("Probabitliy")
         print (prob_transitions[prob_transitions>Binomi])
         print("dice")

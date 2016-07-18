@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import coordinate as cr
 import matplotlib.animation as animation
+
 '''
 Changelog for V0.002
 1.The method for calculate individual infected changed: From pr(object j infected by object i)=beta
@@ -14,7 +15,7 @@ now beta function afford a matrix Beta which the entry is beta ij for probabilit
 '''
 
 class heteregeneousModel:
-    def __init__(self,num_people,beta0,gamma,phi,history=False):
+    def __init__(self,num_people,beta0,gamma,phi,history=False,processHistory=False):
         """
           Initialize the representation of the state vector as a list of integers, 
          [1, 0, 0, ...]
@@ -31,8 +32,14 @@ class heteregeneousModel:
         #I need add the geo-information into state
         self.geo=cr.geodata(num_people,"cluster",xbound=100.0,ybound=100.0,history=history)
         self.BetaMatrix()
-        self.mainProcess()
-    def transform(self,state):
+       
+        
+        
+        self.mainProcess(processHistory)
+    
+    
+    
+    def transform_prob(self,state):
         """
         transform the current state to next step:
         suspect(0)->infectious(1) with probability Lambda(state,beta)
@@ -41,16 +48,23 @@ class heteregeneousModel:
         """
         p_S_to_I = self.Lambda(state)
         #now it is a num_people array
-        p_I_to_R = np.exp(-self.gamma)
+        p_I_to_R = 1-np.exp(-self.gamma)
         prob_transitions = np.zeros((self.num_people,))
         prob_transitions[state==0] = p_S_to_I[p_S_to_I!=0]
         prob_transitions[state==1] = p_I_to_R
+        return prob_transitions
+    
+    def transformation(self,state,prob_transitions):
+        
         Binomi=np.random.uniform(0, 1, prob_transitions.shape)
         transitions = prob_transitions > Binomi
         #
-        self.InfectedOutput(state,prob_transitions,Binomi)
+        #self.InfectedOutput(state,prob_transitions,Binomi)
         #Debug function
         return state + transitions
+    def transform(self,state):
+        prob_transitions=self.transform_prob(state)
+        return self.transformation(state,prob_transitions)
     def InfectiousStop(self,state):
         """
          When all infectious are remove, then we can stop the 
@@ -59,7 +73,7 @@ class heteregeneousModel:
             return False                           #all infected people have removed
         else:
             return True
-    def mainProcess(self):                    #simulation procedure 
+    def mainProcess(self,processHistory=False):                    #simulation procedure 
         """
          This is the process for the infection infect population in risk
          For each day, use transform function to get the state for next day
@@ -76,6 +90,17 @@ class heteregeneousModel:
         for auto stop, use while instead of for
          """
         nday=0
+        if processHistory==True:
+            try:
+                self.record=np.loadtxt("record.txt")
+                cout1 = [np.sum(day==1) for day in record] # list comprehension
+                cout2=np.sum(record[-1]==2)# the total people who are infected(finally all of them are removed)
+                self.cout1=cout1
+                self.cout2=cout2
+                [self.nday,numpeople]=self.record.shape
+                return [cout1,cout2]
+            except FileNotFoundError:
+                print("no file found, auto create new file") 
         #########################################################
         #core code
         while (self.InfectiousStop(state)):
@@ -89,6 +114,7 @@ class heteregeneousModel:
         self.cout1=cout1
         self.cout2=cout2
         self.nday=nday
+        np.savetxt("record.txt",self.record)
         return [cout1,cout2]
     def BetaMatrix(self):
         DistanceMatrix=np.zeros([self.num_people,self.num_people])
@@ -107,6 +133,8 @@ class heteregeneousModel:
         '''
         #BetaMatrix=[self.beta0*np.exp(-i/self.phi) for i in DistanceMatrix] # list comprehension
         BetaMatrix=self.beta0*np.exp(-DistanceMatrix/self.phi)
+        #K takes distance -arg paratemeters->
+            #returns 
         #self.BetaMatrix=np.array(BetaMatrix)
         self.BetaMatrix=BetaMatrix
         self.DistanceMatrix=DistanceMatrix
@@ -130,6 +158,9 @@ class heteregeneousModel:
         #################################################
         return probInfect
     def Animate(self):
+        '''
+        Function for show the animation of infectious
+        '''
         numframes = self.nday+1
         numpoints = self.num_people
         color_data =np.zeros((numframes, numpoints)) 
@@ -149,6 +180,10 @@ class heteregeneousModel:
                                   fargs=(color_data, scat),interval=1000)
         plt.show()
     def InfectedOutput(self,state,prob_transitions,Binomi):
+        '''
+        function for debugging
+        Print the dice and the infected probability for state changed individuals
+        '''
         print("Probabitliy")
         print (prob_transitions[prob_transitions>Binomi])
         print("dice")
@@ -157,7 +192,7 @@ class heteregeneousModel:
         print (self.geo[prob_transitions>Binomi,:])
         
     
-model1=heteregeneousModel(100,0.15,0.03,10,True)
+#model1=heteregeneousModel(20,0.15,0.03,10,True)
 """
 print(model1.record)
 print(model1.cout1)
@@ -195,4 +230,4 @@ def update_plot(i, data, scat):
     scat.set_array(data[i])
     return scat,
 '''
-model1.Animate()
+#model1.Animate()

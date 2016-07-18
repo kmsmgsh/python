@@ -7,7 +7,7 @@ class coordinate:
         self.y=y
 a=coordinate()
 '''
-def geodata(num_people,method="uniform",xbound=100.0,ybound=100.0):
+def geodata(num_people,method="uniform",xbound=100.0,ybound=100.0,history=False):
     """
     Generator a n*2 array, which is the x-coordinate and y-coordinate
     in each row,for n people
@@ -16,16 +16,33 @@ def geodata(num_people,method="uniform",xbound=100.0,ybound=100.0):
     The method equal to cluster means points x01,x02,...x0m,are normally distributed
     around a point x0, x0 is uniform in this surface
     """
-    population=np.zeros((num_people,2))
+    
+   
 
     if method=="uniform":
+        if history==True:
+            try:
+                 population=np.loadtxt("geo_uniform.txt")
+                 return population
+            except FileNotFoundError:
+                print("no file found, auto create new file")
+        population=np.zeros((num_people,2))
         population[:,0]=np.random.uniform(0,xbound,num_people)
         population[:,1]=np.random.uniform(0,ybound,num_people)
         #print(population)
-        plt.scatter(population[:,0],population[:,1])
+        #plt.scatter(population[:,0],population[:,1])
         #plt.show()
+        np.savetxt("geo_uniform.txt",population)
         return population
     if method=="cluster":
+        if history==True:
+            try:
+                 population=np.loadtxt("geo_cluster.txt")
+                 return population
+            except FileNotFoundError:
+                print("no file found, auto create new file")
+        population=np.zeros((num_people,2))
+        
         num_cluster=int(np.random.uniform(0.1,1)*10+1)
         # the number of cluster follow uniform 1,2,...10
         # problem: how to scientifically define the number of cluster?
@@ -44,10 +61,11 @@ def geodata(num_people,method="uniform",xbound=100.0,ybound=100.0):
                 iter+=1
             cout+=1
         ######################################################
-        plt.scatter(population[0,0],population[0,1],cmap=3)
-        plt.scatter(population[1:num_people-1,0],population[1:num_people-1,1])
+        #plt.scatter(population[0,0],population[0,1],cmap=3)
+        #plt.scatter(population[1:num_people-1,0],population[1:num_people-1,1])
         #plt.show()
         #maybe I should put the show section into one part(rather than in each if)
+        np.savetxt("geo_cluster.txt",population)
         return population        
 def cluster_people(num_people,num_cluster):
     '''
@@ -72,7 +90,8 @@ for i in range(100):
     print("probability is")
     print(beta*np.exp(-(distance1)/20))
 '''
-#population=geodata(100,"cluster",100,100)
+#population=geodata(100,"cluster",100,100,True)
+#print(population)
 
 
 
