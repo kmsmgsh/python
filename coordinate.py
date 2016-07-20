@@ -92,7 +92,28 @@ for i in range(100):
 '''
 #population=geodata(100,"cluster",100,100,True)
 #print(population)
-
-
-
-
+def DistanceMatrix(geo):
+    num_people=geo.shape[0]
+    DistanceMatrix=np.zeros([num_people,num_people])
+     #self.BetaMatrix=[for i,j in geo[,:]]
+    X=geo
+    DistanceMatrix=-2 * np.dot(X, X.T) + np.sum(np.square( X), 1).reshape(num_people, 1) + np.sum(np.square( X), 1).reshape(1, num_people)
+    for i in range(0,num_people):
+        DistanceMatrix[i,i]=0
+    DistanceMatrix=np.sqrt(DistanceMatrix)
+    return DistanceMatrix 
+def BetaMatrix(DistanceMatrix,parameter,method="gradient"):
+    
+    if method=="gradient":
+        beta0=parameter[0]
+        phi=parameter[1]
+        BetaMatrix=beta0*np.exp(-DistanceMatrix/phi)
+        #K takes distance -arg paratemeters->
+        #returns 
+        #self.BetaMatrix=np.array(BetaMatrix)
+        return BetaMatrix
+    elif method=="powerlaw":
+        phi=parameter[0]
+        omega=parameter[1]
+        BetaMatrix=1/(phi**2+DistanceMatrix**2)**omega
+        return BetaMatrix

@@ -16,6 +16,10 @@ class Estimation:
         [self.days,self.num_people]=record.shape
         self.phi=phi
     def BetaMatrix(self,beta0,gamma):
+        '''
+        Just save to avoid problem
+        (yet not be used)
+        '''
         DistanceMatrix=np.zeros([self.num_people,self.num_people])
         X=self.geo
         DistanceMatrix=-2 * np.dot(X, X.T) + np.sum(np.square( X), 1).reshape(self.num_people, 1) + np.sum(np.square( X), 1).reshape(1, self.num_people)
@@ -62,7 +66,9 @@ class Estimation:
         change=np.vstack((recordN,self.record[self.days-1,:]))
         change=change-self.record
         change=np.delete(change,-1,0)#change is a matrix to record the change of state, which describe the change and result in record N
-        BetaMatrix=self.BetaMatrix(beta0,gamma)
+        #BetaMatrix=self.BetaMatrix(beta0,gamma)
+        DistanceMatrix=cr.DistanceMatrix(self.geo)
+        BetaMatrix=cr.BetaMatrix(DistanceMatrix,[beta0,self.phi])
         Likeli=np.ones((self.num_people,1)).T
         for column in self.record:
             #print(column)
@@ -88,6 +94,13 @@ class Estimation:
     def BetaPosterior(self,beta0,a=1,b=1):
         from scipy.stats import beta
         return beta.pdf(beta0,a,b)*self.BetaLikelihoodQ(beta0)
+    def GammaPosteriorBeta0(self,parameter):
+        from scipy.stats import gamma
+        return gamma.pdf(parameter[0],0.001,scale=1/0.001)*self.Likelihood(np.array((parameter)))
+        #0.4
+    def GammaPosteriorGamma(self,parameter):
+        from scipy.stats import gamma
+        return gamma.pdf(parameter[1],0.001,scale=1/0.001)*self.Likelihood(np.array((parameter)))
 
 '''
 model1=gc.heteregeneousModel(100,0.4,0.3,10,True,False)

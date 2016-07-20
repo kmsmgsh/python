@@ -15,7 +15,7 @@ now beta function afford a matrix Beta which the entry is beta ij for probabilit
 '''
 
 class heteregeneousModel:
-    def __init__(self,num_people,beta0,gamma,phi,history=False,processHistory=False):
+    def __init__(self,num_people,beta0,gamma,phi,history=False,processHistory=False,Distance="gradient"):
         """
           Initialize the representation of the state vector as a list of integers, 
          [1, 0, 0, ...]
@@ -27,18 +27,13 @@ class heteregeneousModel:
         self.beta0=beta0 #baseline beta
         self.phi=phi     #scale parameter
         self.gamma=gamma #remove rate
-
+        self.Distance=Distance
         #change start with here
         #I need add the geo-information into state
         self.geo=cr.geodata(num_people,"cluster",xbound=100.0,ybound=100.0,history=history)
-        self.BetaMatrix()
-       
-        
-        
+        self.DistanceMatrix=cr.DistanceMatrix(self.geo)
+        self.BetaMatrix=cr.BetaMatrix(self.DistanceMatrix,[beta0,phi],Distance)
         self.mainProcess(processHistory)
-    
-    
-    
     def transform_prob(self,state):
         """
         transform the current state to next step:
@@ -116,28 +111,7 @@ class heteregeneousModel:
         self.nday=nday
         np.savetxt("record.txt",self.record)
         return [cout1,cout2]
-    def BetaMatrix(self):
-        DistanceMatrix=np.zeros([self.num_people,self.num_people])
-        '''
-        How to write the inner assignment for a matrix(instead of two loop)
-         one optional optimal method: only calculate upper diagnoal entry
-        '''
-        #self.BetaMatrix=[for i,j in geo[,:]]
-        X=self.geo
-        DistanceMatrix=-2 * np.dot(X, X.T) + np.sum(np.square( X), 1).reshape(self.num_people, 1) + np.sum(np.square( X), 1).reshape(1, self.num_people)
-        DistanceMatrix=np.sqrt(DistanceMatrix)
-        '''
-        for i in range(self.num_people):
-            for j in range(self.num_people):
-                DistanceMatrix[i][j]=np.linalg.norm(self.geo[i,0:2]-self.geo[j,0:2])#Euclidean distance
-        '''
-        #BetaMatrix=[self.beta0*np.exp(-i/self.phi) for i in DistanceMatrix] # list comprehension
-        BetaMatrix=self.beta0*np.exp(-DistanceMatrix/self.phi)
-        #K takes distance -arg paratemeters->
-            #returns 
-        #self.BetaMatrix=np.array(BetaMatrix)
-        self.BetaMatrix=BetaMatrix
-        self.DistanceMatrix=DistanceMatrix
+   
     def Lambda(self,state):
         '''
         Lambda function returns a transform probability for every state to next step(S->I, I->R)
