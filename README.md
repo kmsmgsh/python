@@ -1,5 +1,6 @@
 # python
 python works
+The daily record for project procedure
 ### Todo list for the project
 2016/7/29
 
