@@ -7,7 +7,7 @@ The daily record for project procedure
 
     -[x] jupyter notebook with markdown syntax 1 hour with two poromodo
     -[ ] a github blog with markdown to describe my work  
-    -[ ] The rightnow work procedure
+    -[x] The rightnow work procedure
 -[ ]  **Theoretical work** 
 
     -[ ] 1 hour reading about the Gaussian Process Machine Learning
