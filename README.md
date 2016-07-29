@@ -2,7 +2,7 @@
 ### 
 2016/7/29
 
-- [ ] **Notes development tool**
+- [x] **Notes development tool**
 
     - [x] jupyter notebook with markdown syntax 1 hour with two poromodo
     - [x] a github blog with markdown to describe my work(this document shows half of it)  
