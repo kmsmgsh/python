@@ -2,11 +2,12 @@
 ### 
 2016/7/30
 
-- [ ] **code work**
+- [x] **code work**
 
    - [x] Finish "powerlaw" decay function for generator
-   - [ ] Finish Metropolis Hastings for "powerlaw" decay functin
-
+   - [x] Finish Metropolis Hastings for "powerlaw" decay functin
+- [ ] **Design Algorithm**
+   - [ ] Design a methodology to update the GP
 
 
 
