@@ -1,5 +1,15 @@
 # Todo list for the project
 ### 
+2016/7/30
+Finish the "powerlaw" for generator, and found the suitable parameter for powerlaw decay function.
+- [ ] **code work**
+
+   - [x] Finish "powerlaw" decay function for generator
+   - [ ] Finish Metropolis Hastings for "powerlaw" decay functin
+
+
+
+
 2016/7/29
 
 - [x] **Notes development tool**
