@@ -89,3 +89,4 @@ problem remain:
 ~The port for debug for generator
 testProbabilityMode: When this parameter be truth, then open the mode of test mode.The transition probability for every inidvidual everyday will be printed to see whats wrong
 ~
+[FINISHED]
