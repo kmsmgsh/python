@@ -55,8 +55,10 @@ passed with problem1
 model1=gc2.heteregeneousModel(100,[0.9,0.2,1.5,0.3],False,False,"powerlaw","uniform")
 ```
 The parameter map to [beta0=0.9,sigma=0.2,omega=1.5,gamma=0.3]
+
 not work
 no spread
+
 ```python
 model1=gc2.heteregeneousModel(100,[1.9,0.2,1.5,0.3],False,False,"powerlaw","uniform")
 ```
@@ -64,14 +66,17 @@ still not work
 no spread
 [3,0.2,1.3,0.3]
 still not spread
+
 maybe is the problem with code
 [5,0.2,1.3,0.3]
 still not spread
-[5,0.2,1,0.3]
-start spread, looks not that bad
+
+
 ```python
 model1=gc2.heteregeneousModel(100,[5,0.2,1,0.3],False,False,"powerlaw","uniform",True)
 ```
+[5,0.2,1,0.3]
+start spread, looks not that bad
 ---
 problem remain:
 1.the plt.ion() will cause the plot not responding
