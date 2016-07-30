@@ -50,9 +50,15 @@ model1=gc2.heteregeneousModel(100,[1.9,0.2,1.5,0.3],False,False,"powerlaw","unif
 still not work
 no spread
 [3,0.2,1.3,0.3]
-still no spread
+still not spread
 maybe is the problem with code
-
+[5,0.2,1.3,0.3]
+still not spread
+[5,0.2,1,0.3]
+start spread, looks not that bad
+```python
+model1=gc2.heteregeneousModel(100,[5,0.2,1,0.3],False,False,"powerlaw","uniform",True)
+```
 ---
 problem remain:
 1.the plt.ion() will cause the plot not responding
