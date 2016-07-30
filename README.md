@@ -79,6 +79,7 @@ model1=gc2.heteregeneousModel(100,[5,0.2,1,0.3],False,False,"powerlaw","uniform"
 ```
 [5,0.2,1,0.3]
 start spread, looks not that bad
+
 ---
 problem remain:
 1.the plt.ion() will cause the plot not responding
