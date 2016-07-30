@@ -23,8 +23,11 @@
     - [x] Read the introduction part for MCMC for Variationally Sparse Gaussian process
 - [ ] **Code work**
 
-    - [ ] Parameterise the Code (For powerlaw part with 3 parameter as beta0, sigma, omega)
+    - [x] Parameterise the Code (For powerlaw part with 3 parameter as beta0, sigma, omega)
     - [ ] Design the work logistic for GP
+    There have some problem with the "vector" and "Matrix" transform function.
+    We need transfor the Gaussian vector to BetaMatrix base on DistanceMatrix
+    Have to find the operator for upper diagnoal distance
 **Code work procedure**
 # Code tast remainder
 
