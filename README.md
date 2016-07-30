@@ -64,6 +64,7 @@ model1=gc2.heteregeneousModel(100,[1.9,0.2,1.5,0.3],False,False,"powerlaw","unif
 ```
 still not work
 no spread
+
 [3,0.2,1.3,0.3]
 still not spread
 
