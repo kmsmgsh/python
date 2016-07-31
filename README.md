@@ -3,7 +3,9 @@
 2016/7/31
 - [ ] **GP method in Estimation**
 
-      - [ ] Cholesky Decomposition
+      - [ ] Cholesky Decomposition for covariance matrix
+            numpy.linalg.cholesky()
+            but the covariance matrix is a problem
       - [ ] off triangle matrix to vector
 
 2016/7/30
