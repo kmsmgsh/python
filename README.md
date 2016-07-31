@@ -7,6 +7,9 @@
             numpy.linalg.cholesky()
             but the covariance matrix is a problem
       - [ ] off triangle matrix to vector
+- [ ] **main part change**
+
+      - [ ] Use the log and multiple to deal with the likelihoodfunction
 
 2016/7/30
 
