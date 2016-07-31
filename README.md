@@ -102,3 +102,25 @@ problem remain:
 testProbabilityMode: When this parameter be truth, then open the mode of test mode.The transition probability for every inidvidual everyday will be printed to see whats wrong
 ~
 [FINISHED]
+# GP work procedure
+
+标签（空格分隔）： GP MCMC workPlan
+
+---
+
+```flow
+st=>start: Distance Matrix nxn
+op1=>operation: Correlation Matrix
+op2=>operation: Random sample from Gaussian distribution
+op3=>operation: reconstruct to be add-ons on beta matrix
+op4=>operation: Use new Beta Matrix to construct Likelihood
+op6=>operation: update parameter
+op7=>operation: update GP matrix
+con=>condition: Enough iterations?
+e=>end
+
+st->op1->op2->op3->op4->op6->op7->con
+con(no)->op3
+con(yes)->e
+```
+After the final GP result, we need reorder the data with distance to get the distance decay function
