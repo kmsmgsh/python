@@ -1,5 +1,11 @@
 # Todo list for the project
 ### 
+2016/7/31
+- [ ] **GP method in Estimation**
+
+      - [ ] Cholesky Decomposition
+      - [ ] off triangle matrix to vector
+
 2016/7/30
 
 - [x] **code work**
