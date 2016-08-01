@@ -1,12 +1,16 @@
 # Todo list for the project
 ### 
+
+2016/8/1
+- [ ] **log scale of the likelihood**
+- [ ] **log transform for the GP**
 2016/7/31
 - [ ] **GP method in Estimation**
 
-      - [ ] Cholesky Decomposition for covariance matrix
+      - [x] Cholesky Decomposition for covariance matrix
             numpy.linalg.cholesky()
             but the covariance matrix is a problem
-      - [ ] off triangle matrix to vector
+      - [x] off triangle matrix to vector
 - [ ] **main part change**
 
       - [ ] Use the log and multiple to deal with the likelihoodfunction
