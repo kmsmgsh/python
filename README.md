@@ -4,6 +4,8 @@
 2016/8/1
 - [ ] **log scale of the likelihood**
 - [ ] **log transform for the GP**
+
+
 2016/7/31
 - [ ] **GP method in Estimation**
 
