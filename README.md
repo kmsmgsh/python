@@ -1,9 +1,10 @@
 # Todo list for the project
 ### 
-
 2016/8/1
-- [ ] **log scale of the likelihood**
-- [ ] **log transform for the GP**
+- [ ] GP update
+2016/8/1
+- [x] **log scale of the likelihood**
+- [x] **log transform for the GP**
 
 
 2016/7/31
