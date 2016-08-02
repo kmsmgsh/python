@@ -2,8 +2,8 @@
 ### 
 
 2016/8/1
-- [ ] GP update
-- 
+- [ ] **GP update**
+
 2016/8/1
 - [x] **log scale of the likelihood**
 - [x] **log transform for the GP**
