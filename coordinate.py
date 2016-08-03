@@ -7,6 +7,11 @@ class coordinate:
         self.y=y
 a=coordinate()
 '''
+'''
+Changelog 2016/7/28
+Change powerlaw method for beta matrix as three input parameter:beta0,phi,omega
+and add the input test and error output
+'''
 def geodata(num_people,method="uniform",xbound=100.0,ybound=100.0,history=False):
     """
     Generator a n*2 array, which is the x-coordinate and y-coordinate
@@ -79,20 +84,48 @@ def cluster_people(num_people,num_cluster):
         return num_people
     first=int (np.random.uniform(1,num_people-num_cluster))
     return np.hstack((first,cluster_people(num_people-first,num_cluster-1)))
-'''     Following is  Test code
-population=geodata(100,"uniform",100,100)
-beta=0.3
+    '''     Following is  Test code
+    population=geodata(100,"uniform",100,100)
+    beta=0.3
 
-for i in range(100):
+    for i in range(100):
     distance1=np.linalg.norm(population[1,:]-population[i,:])
     print("distance is")
     print(distance1)
     print("probability is")
     print(beta*np.exp(-(distance1)/20))
-'''
+    '''
 #population=geodata(100,"cluster",100,100,True)
 #print(population)
+def DistanceMatrix(geo):
+    num_people=geo.shape[0]
+    DistanceMatrix=np.zeros([num_people,num_people])
+     #self.BetaMatrix=[for i,j in geo[,:]]
+    X=geo
+    DistanceMatrix=-2 * np.dot(X, X.T) + np.sum(np.square( X), 1).reshape(num_people, 1) + np.sum(np.square( X), 1).reshape(1, num_people)
+    for i in range(0,num_people):
+        DistanceMatrix[i,i]=0
+    DistanceMatrix=np.sqrt(DistanceMatrix)
+    return DistanceMatrix 
+def BetaMatrix(DistanceMatrix,parameter,method="gradient"):   
+    if method=="gradient":
+        beta0=parameter[0]
+        phi=parameter[1]
+        BetaMatrix=beta0*np.exp(-DistanceMatrix/phi)
+        #K takes distance -arg paratemeters->
+        #returns 
+        #self.BetaMatrix=np.array(BetaMatrix)
+        return BetaMatrix
+    elif method=="powerlaw":
+        parameter=np.array(parameter)
+        if parameter.size!=3:
+            raise ValueError("powerlaw method need 3 arguments as beta0,phi,omega")
+        beta0=parameter[0]
+        phi=parameter[1]
+        omega=parameter[2]
+        BetaMatrix=beta0*1/(phi**2+DistanceMatrix**2)**omega
+        return BetaMatrix
 
-
-
-
+def plotcoor(geo):
+    plt.scatter(geo[:,0],geo[:,1])
+    #plt.figure()
