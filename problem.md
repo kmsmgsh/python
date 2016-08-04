@@ -83,3 +83,4 @@ I think you've solved this problem already. But there's one more thing you can d
        
        (I used to think the greater the l is, the population limit is large. But this fact counter it.
 2. [ ] When population comes small. the MCMC result (with constant GP) becomes really bad except the recover rate
+       This also happens to MCMC without GP
