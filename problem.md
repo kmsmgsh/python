@@ -72,7 +72,11 @@ I think you've solved this problem already. But there's one more thing you can d
 1. [ ] The positive definite of covariance matrix:
        The cholesky decomposition would have an error "not positive definite".
        This happens link to parameter l in exp(-|x-x`|^2/2l).
+
        When l=1, this problem happens when population greater than 15~
+       
        When l=0.1, this problem happens when population greater than 25~
+       
        When l=0.01, this problem happens when population greater than 40~
+       
        (I used to think the greater the l is, the population limit is large. But this fact counter it.
