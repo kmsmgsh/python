@@ -67,3 +67,5 @@ Side exercise 2: show that this equation gives the log-determinant of K.
 •  The GP influence is too large for BetaMatrix
 The beta matrix is around 10^-1~10^-90, but the random effect from GP is exp(MVN(0,SIGMA)) which is around 1, is too large to influence the betaMatrix
 I think you've solved this problem already. But there's one more thing you can do: try rescaling the kernel function, by changing the \sigma parameter in from of the equation. 
+
+###2
