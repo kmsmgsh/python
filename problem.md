@@ -82,3 +82,4 @@ I think you've solved this problem already. But there's one more thing you can d
        When l get smaller, the correlation matrix more closer to identity matrix
        
        (I used to think the greater the l is, the population limit is large. But this fact counter it.
+2. [ ] When population comes small. the MCMC result (with constant GP) becomes really bad except the recover rate
