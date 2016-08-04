@@ -85,3 +85,4 @@ I think you've solved this problem already. But there's one more thing you can d
 2. [ ] When population comes small. the MCMC result (with constant GP) becomes really bad except the recover rate
        This also happens to MCMC without GP
        Most serious is beta0, scale parameter phi is not that bad. Remove rate gamma always behave good
+       Also, the GP influence is large for small population
