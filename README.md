@@ -1,6 +1,10 @@
 # Todo list for the project
 ### 
 
+2016/8/2-4
+- [ ] Debugging
+
+
 2016/8/1
 - [ ] **GP update**
 
