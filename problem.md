@@ -1,10 +1,10 @@
 # Problem remain
 ### 1
-- [ ] The chosen of Random Walk Metropolis MVN correlation function
-- [ ] The negative part of the GP ? (we need some negative effect on BetaMatrix?)
-- [ ] How the Cholesky work during MCMC?
-- [ ] When the population greater than 24, the determinant of the Correlation Matrix comes to zero
-- [ ] The GP influence is too large for BetaMatrix
+- [x] The chosen of Random Walk Metropolis MVN correlation function
+- [x] The negative part of the GP ? (we need some negative effect on BetaMatrix?)
+- [x] How the Cholesky work during MCMC?
+- [x] When the population greater than 24, the determinant of the Correlation Matrix comes to zero
+- [x] The GP influence is too large for BetaMatrix
 
 • The chosen of Random Walk Metropolis MVN correlation function
 I directly use mvn(previousValue,Identity(n)) as randomwalk, but I feel bad about this.
