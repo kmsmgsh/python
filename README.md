@@ -2,11 +2,11 @@
 ### 
 
 2016/8/2-4
-- [ ] Debugging
+- [x] Debugging
 
 
 2016/8/1
-- [ ] **GP update**
+- [x] **GP update**
 
 2016/8/1
 - [x] **log scale of the likelihood**
@@ -22,7 +22,7 @@
       - [x] off triangle matrix to vector
 - [ ] **main part change**
 
-      - [ ] Use the log and multiple to deal with the likelihoodfunction
+      - [x] Use the log and multiple to deal with the likelihoodfunction
 
 2016/7/30
 
@@ -30,8 +30,8 @@
 
    - [x] Finish "powerlaw" decay function for generator
    - [x] Finish Metropolis Hastings for "powerlaw" decay functin
-- [ ] **Design Algorithm**
-   - [ ] Design a methodology to update the GP
+- [x] **Design Algorithm**
+   - [x] Design a methodology to update the GP
 
 
 
