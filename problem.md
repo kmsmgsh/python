@@ -70,7 +70,7 @@ The beta matrix is around 10^-1~10^-90, but the random effect from GP is exp(MVN
 I think you've solved this problem already. But there's one more thing you can do: try rescaling the kernel function, by changing the \sigma parameter in from of the equation. 
 
 ###2
-1. [ ] The positive definite of covariance matrix:
+1. [x] The positive definite of covariance matrix:
        The cholesky decomposition would have an error "not positive definite".
        This happens link to parameter l in exp(-|x-x`|^2/2l).
 
@@ -83,7 +83,18 @@ I think you've solved this problem already. But there's one more thing you can d
        When l get smaller, the correlation matrix more closer to identity matrix
        
        (I used to think the greater the l is, the population limit is large. But this fact counter it.
-2. [ ] When population comes small. the MCMC result (with constant GP) becomes really bad except the recover rate
+       
+       
+       The issue is probably just about the numerical precision of the matrix. To help stabilize the eigenspectrum of the matrix, you can do
+
+K = CovarianceMatrix()
+K = K + np.eye(K.shape[0]) * 1e-9
+
+Which should make the cholesky decomposition work nicely.
+
+       
+       
+2. [x] When population comes small. the MCMC result (with constant GP) becomes really bad except the recover rate
        This also happens to MCMC without GP
        Most serious is beta0, scale parameter phi is not that bad. Remove rate gamma always behave good
        Also, the GP influence is large for small population
