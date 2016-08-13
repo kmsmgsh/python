@@ -137,3 +137,5 @@ con(no)->op3
 con(yes)->e
 ```
 After the final GP result, we need reorder the data with distance to get the distance decay function
+
+python/SimulateWithEXPAcceptRate=0.104.png
