@@ -138,4 +138,4 @@ con(yes)->e
 ```
 After the final GP result, we need reorder the data with distance to get the distance decay function
 
-[ExpSimulationExpBaseline](python/SimulateWithEXPAcceptRate=0.104.png)
+[ExpSimulationExpBaseline](https://github.com/kmsmgsh/python/blob/master/SimulateWithEXPAcceptRate%3D0.104.png)
